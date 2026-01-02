@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         小L书——LinuxDo仿小红书主题
 // @namespace    http://tampermonkey.net/
-// @version      2.3
+// @version      2.4
 // @license      MIT
 // @description  将LinuxDo改造成小红书风格瀑布流布局，支持自定义主题色
 // @author       JackyLiii
@@ -56,30 +56,40 @@
                 }
 
                 /* ===== 预加载卡片核心样式，避免闪烁 ===== */
-                /* 文字特效 - 必须早期加载 */
+                /* 文字特效 - 小红书风格花字 */
                 .xhs-hl {
-                    display: inline;
-                    padding: 2px 6px;
-                    margin: 0 1px;
-                    border-radius: 4px;
-                    font-weight: 700;
+                    background: linear-gradient(to top, var(--hl-color, rgba(255,220,100,0.5)) 70%, transparent 70%);
+                    padding: 0 2px;
+                    font-weight: 600;
                 }
                 .xhs-ul {
                     text-decoration: underline;
+                    text-decoration-color: var(--ul-color, currentColor);
                     text-decoration-thickness: 2px;
+                    text-underline-offset: 2px;
+                    font-weight: 500;
+                }
+                .xhs-wave {
+                    text-decoration: underline wavy;
+                    text-decoration-color: var(--ul-color, currentColor);
+                    text-decoration-thickness: 1.5px;
                     text-underline-offset: 3px;
-                    font-weight: 600;
                 }
                 .xhs-dot {
                     position: relative;
+                    font-weight: 600;
                 }
                 .xhs-dot::after {
-                    content: '•';
+                    content: '';
                     position: absolute;
-                    bottom: -8px;
+                    bottom: -3px;
                     left: 50%;
                     transform: translateX(-50%);
-                    font-size: 8px;
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background: currentColor;
+                    opacity: 0.6;
                 }
                 .xhs-bd {
                     font-weight: 700;
@@ -773,84 +783,74 @@
                 }
                 @media (max-width: 520px) { .xhs-card-excerpt { font-size: 12px; line-height: 1.9; -webkit-line-clamp: 3; } }
 
-                /* 文字效果 */
+                /* 文字效果 - 小红书风格花字 */
                 .xhs-hl {
-                    display: inline;
-                    padding: 2px 6px;
-                    margin: 0 1px;
-                    border-radius: 4px;
-                    font-weight: 700;
+                    background: linear-gradient(to top, var(--hl-color, rgba(255,220,100,0.5)) 70%, transparent 70%);
+                    padding: 0 2px;
+                    font-weight: 600;
                 }
                 .xhs-ul {
                     text-decoration: underline;
+                    text-decoration-color: var(--ul-color, currentColor);
                     text-decoration-thickness: 2px;
+                    text-underline-offset: 2px;
+                    font-weight: 500;
+                }
+                .xhs-wave {
+                    text-decoration: underline wavy;
+                    text-decoration-color: var(--ul-color, currentColor);
+                    text-decoration-thickness: 1.5px;
                     text-underline-offset: 3px;
-                    font-weight: 600;
                 }
                 .xhs-dot {
                     position: relative;
+                    font-weight: 600;
                 }
                 .xhs-dot::after {
-                    content: '•';
+                    content: '';
                     position: absolute;
-                    bottom: -8px;
+                    bottom: -3px;
                     left: 50%;
                     transform: translateX(-50%);
-                    font-size: 8px;
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background: currentColor;
+                    opacity: 0.6;
                 }
                 .xhs-bd {
                     font-weight: 700;
                 }
 
-                /* ===== 亮色配色 ===== */
-                .xhs-card-bg.s1 { background: #FFF5F5; color: #4A2C2C; }
-                .xhs-card-bg.s1 .xhs-hl { background: #FED7D7; color: #C53030; }
-                .xhs-card-bg.s1 .xhs-ul { text-decoration-color: #FC8181; }
+                /* ===== 亮色配色方案 ===== */
+                .xhs-card-bg.s1 { background: #FFF5F5; color: #4A2C2C; --hl-color: rgba(254,178,178,0.5); --ul-color: #FC8181; }
                 .xhs-card-bg.s1 .xhs-deco { color: #FEB2B2; }
 
-                .xhs-card-bg.s2 { background: #EBF8FF; color: #2A4365; }
-                .xhs-card-bg.s2 .xhs-hl { background: #BEE3F8; color: #2B6CB0; }
-                .xhs-card-bg.s2 .xhs-ul { text-decoration-color: #63B3ED; }
+                .xhs-card-bg.s2 { background: #EBF8FF; color: #2A4365; --hl-color: rgba(144,205,244,0.5); --ul-color: #63B3ED; }
                 .xhs-card-bg.s2 .xhs-deco { color: #90CDF4; }
 
-                .xhs-card-bg.s3 { background: #F0FFF4; color: #22543D; }
-                .xhs-card-bg.s3 .xhs-hl { background: #C6F6D5; color: #276749; }
-                .xhs-card-bg.s3 .xhs-ul { text-decoration-color: #68D391; }
+                .xhs-card-bg.s3 { background: #F0FFF4; color: #22543D; --hl-color: rgba(154,230,180,0.5); --ul-color: #68D391; }
                 .xhs-card-bg.s3 .xhs-deco { color: #9AE6B4; }
 
-                .xhs-card-bg.s4 { background: #FAF5FF; color: #44337A; }
-                .xhs-card-bg.s4 .xhs-hl { background: #E9D8FD; color: #6B46C1; }
-                .xhs-card-bg.s4 .xhs-ul { text-decoration-color: #B794F4; }
+                .xhs-card-bg.s4 { background: #FAF5FF; color: #44337A; --hl-color: rgba(214,188,250,0.5); --ul-color: #B794F4; }
                 .xhs-card-bg.s4 .xhs-deco { color: #D6BCFA; }
 
-                .xhs-card-bg.s5 { background: #FFFAF0; color: #744210; }
-                .xhs-card-bg.s5 .xhs-hl { background: #FEEBC8; color: #C05621; }
-                .xhs-card-bg.s5 .xhs-ul { text-decoration-color: #F6AD55; }
+                .xhs-card-bg.s5 { background: #FFFAF0; color: #744210; --hl-color: rgba(251,211,141,0.5); --ul-color: #F6AD55; }
                 .xhs-card-bg.s5 .xhs-deco { color: #FBD38D; }
 
-                .xhs-card-bg.s6 { background: #E6FFFA; color: #234E52; }
-                .xhs-card-bg.s6 .xhs-hl { background: #B2F5EA; color: #319795; }
-                .xhs-card-bg.s6 .xhs-ul { text-decoration-color: #4FD1C5; }
+                .xhs-card-bg.s6 { background: #E6FFFA; color: #234E52; --hl-color: rgba(129,230,217,0.5); --ul-color: #4FD1C5; }
                 .xhs-card-bg.s6 .xhs-deco { color: #81E6D9; }
 
-                .xhs-card-bg.s7 { background: #FFFFF0; color: #5F370E; }
-                .xhs-card-bg.s7 .xhs-hl { background: #FAF089; color: #B7791F; }
-                .xhs-card-bg.s7 .xhs-ul { text-decoration-color: #ECC94B; }
+                .xhs-card-bg.s7 { background: #FFFFF0; color: #5F370E; --hl-color: rgba(246,224,94,0.5); --ul-color: #ECC94B; }
                 .xhs-card-bg.s7 .xhs-deco { color: #F6E05E; }
 
-                .xhs-card-bg.s8 { background: #FFF5F7; color: #521B41; }
-                .xhs-card-bg.s8 .xhs-hl { background: #FED7E2; color: #B83280; }
-                .xhs-card-bg.s8 .xhs-ul { text-decoration-color: #F687B3; }
+                .xhs-card-bg.s8 { background: #FFF5F7; color: #521B41; --hl-color: rgba(251,182,206,0.5); --ul-color: #F687B3; }
                 .xhs-card-bg.s8 .xhs-deco { color: #FBB6CE; }
 
-                .xhs-card-bg.s9 { background: #EDFDFD; color: #1D4044; }
-                .xhs-card-bg.s9 .xhs-hl { background: #C4F1F9; color: #0987A0; }
-                .xhs-card-bg.s9 .xhs-ul { text-decoration-color: #76E4F7; }
+                .xhs-card-bg.s9 { background: #EDFDFD; color: #1D4044; --hl-color: rgba(157,236,249,0.5); --ul-color: #76E4F7; }
                 .xhs-card-bg.s9 .xhs-deco { color: #9DECF9; }
 
-                .xhs-card-bg.s10 { background: #FFF8F1; color: #63351D; }
-                .xhs-card-bg.s10 .xhs-hl { background: #FFE4CA; color: #C4540A; }
-                .xhs-card-bg.s10 .xhs-ul { text-decoration-color: #FF9F5A; }
+                .xhs-card-bg.s10 { background: #FFF8F1; color: #63351D; --hl-color: rgba(255,189,138,0.5); --ul-color: #FF9F5A; }
                 .xhs-card-bg.s10 .xhs-deco { color: #FFBD8A; }
 
                 /* ===== 图片封面 ===== */
@@ -1316,7 +1316,7 @@
                     <div class="xhs-panel-title">
                         <span>📕</span>
                         <span>小红书模式</span>
-                        <span class="xhs-panel-ver">v2.3</span>
+                        <span class="xhs-panel-ver">v2.4</span>
                     </div>
                     <div class="xhs-panel-close">×</div>
                 </div>
@@ -1445,17 +1445,33 @@
 
         styles: ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'],
 
+        // 升级的装饰图案库
         cornerDecos: [
+            // 几何图形
             '╭', '╮', '╰', '╯', '┌', '┐', '└', '┘',
-            '•', '◦', '○', '◌', '◍', '◎',
-            '✧', '✦', '◇', '◆', '△', '▽',
-            '✿', '❀', '❁', '✾',
-            '✩', '✪', '✫', '☆',
-            '♡', '♥',
-            '🌿', '☘', '🍃',
+            '◇', '◆', '△', '▽', '○', '●', '□', '■',
+            // 星星花朵
+            '✦', '✧', '★', '☆', '✩', '✪', '✫', '✬',
+            '✿', '❀', '❁', '✾', '❃', '❋', '✼', '✽',
+            '❄', '❅', '❆', '✲', '✱', '✳', '✴', '✵',
+            // 爱心
+            '♡', '♥', '❤', '💕', '💗', '💖',
+            // 自然元素
+            '🌿', '☘', '🍃', '🌸', '🌺', '🌼', '🌻', '🌷',
+            '🦋', '🐝', '✨', '💫', '⭐', '🌟',
+            // 符号装饰
+            '※', '❈', '❉', '❊', '✺', '✹', '✸', '✷',
         ],
 
-        lineChars: ['·', '•', '◦', '○', '◌', '─', '┄', '┈', '╌', '╍', '∙', '⋅', '⋯'],
+        // 线条装饰字符
+        lineChars: ['·', '•', '◦', '○', '◌', '─', '┄', '┈', '╌', '╍', '∙', '⋅', '⋯', '～', '〰', '≈'],
+
+        // 边框装饰图案
+        borderPatterns: [
+            '✿ ❀ ✿', '★ ☆ ★', '◇ ◆ ◇', '♡ ♥ ♡',
+            '· · ·', '• • •', '○ ○ ○', '◦ ◦ ◦',
+            '〜 〜 〜', '∽ ∽ ∽', '≈ ≈ ≈'
+        ],
 
         emojis: [
             '💻', '🚀', '✨', '💡', '🔥', '📝', '🎯', '📚', '🌟', '💬',
@@ -1520,14 +1536,6 @@
             this.container.appendChild(frag);
         },
 
-        reset() {
-            this.seen.clear();
-            this.index = 0;
-            this.loadQueue = [];
-            this.container?.remove();
-            this.container = null;
-        },
-
         _extract() {
             const topics = [];
             const rows = document.querySelectorAll('tbody.topic-list-body > tr[data-topic-id]');
@@ -1565,33 +1573,97 @@
             return topics;
         },
 
+        reset() {
+            this.seen.clear();
+            this.cache.clear(); // 清空缓存
+            this.index = 0;
+            this.loadQueue = [];
+            this.isLoading = false;
+            // 断开所有观察
+            if (this.observer) {
+                this.observer.disconnect();
+            }
+            this.container?.remove();
+            this.container = null;
+        },
+
         _processText(text, seed) {
             const rand = Utils.seededRandom(seed);
-            const segments = text.match(/[\u4e00-\u9fa5]+|[a-zA-Z0-9]+|\s+|[^\u4e00-\u9fa5a-zA-Z0-9\s]+/g) || [text];
 
-            const markable = [];
-            segments.forEach((seg, i) => {
-                if (seg.trim().length >= 2 && !/^\s+$/.test(seg) && !/^[^\u4e00-\u9fa5a-zA-Z0-9]+$/.test(seg)) {
-                    markable.push(i);
+            // 分词：中文词组 / 英文单词 / 空白 / 标点 / 单个中文字
+            const segments = text.match(/[\u4e00-\u9fa5]{2,}|[a-zA-Z][a-zA-Z0-9]*|\s+|[^\u4e00-\u9fa5a-zA-Z0-9\s]+|[\u4e00-\u9fa5]/g) || [text];
+
+            // 找出可以加效果的词
+            // 条件：中文2字以上，或英文3字母以上，且不是常见无意义词
+            const skipWords = new Set(['的', '了', '是', '在', '有', '和', '与', '或', '但', '也', '都', '就', '还', '而', '及', 'the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'had', 'her', 'was', 'one', 'our', 'out']);
+
+            const markableIndices = [];
+            segments.forEach((seg, idx) => {
+                const trimmed = seg.trim().toLowerCase();
+                if (skipWords.has(trimmed)) return;
+
+                // 中文至少2个字，英文至少3个字母
+                if (/^[\u4e00-\u9fa5]{2,}$/.test(seg.trim()) || /^[a-zA-Z]{3,}[a-zA-Z0-9]*$/.test(seg.trim())) {
+                    markableIndices.push(idx);
                 }
             });
 
-            if (markable.length < 2) return Utils.escapeHtml(text);
-
-            const totalMarks = Math.max(1, Math.floor(markable.length * (0.25 + rand() * 0.1)));
-            const shuffled = [...markable].sort(() => rand() - 0.5);
-
-            const effects = new Map();
-            const types = ['hl', 'ul', 'bd', 'dot'];
-
-            for (let i = 0; i < totalMarks && i < shuffled.length; i++) {
-                effects.set(shuffled[i], types[Math.floor(rand() * types.length)]);
+            // 如果没有符合条件的词，直接返回
+            if (markableIndices.length === 0) {
+                return Utils.escapeHtml(text);
             }
 
-            return segments.map((seg, i) => {
+            // 标记数量：1-3个词，约30%-50%的可标记词
+            const markCount = Math.max(1, Math.min(3, Math.ceil(markableIndices.length * (0.3 + rand() * 0.2))));
+
+            // 随机打乱并选择
+            const shuffled = [...markableIndices].sort(() => rand() - 0.5);
+            const toMark = shuffled.slice(0, markCount);
+
+            // 效果类型和权重
+            const effects = [
+                { cls: 'xhs-hl', weight: 28 },      // 荧光笔高亮
+                { cls: 'xhs-ul', weight: 22 },      // 下划线
+                { cls: 'xhs-wave', weight: 15 },    // 波浪线
+                { cls: 'xhs-bd', weight: 22 },      // 加粗
+                { cls: 'xhs-dot', weight: 13 }      // 加点
+            ];
+            const totalWeight = effects.reduce((sum, e) => sum + e.weight, 0);
+
+            // 根据权重随机选择效果
+            const pickEffect = () => {
+                let r = rand() * totalWeight;
+                for (const e of effects) {
+                    r -= e.weight;
+                    if (r <= 0) return e.cls;
+                }
+                return effects[0].cls;
+            };
+
+            // 为每个选中的词分配不同的效果，尽量不重复
+            const effectMap = new Map();
+            const usedEffects = new Set();
+
+            toMark.forEach(idx => {
+                let effect;
+                // 尝试选择一个还没用过的效果
+                for (let i = 0; i < 5; i++) {
+                    effect = pickEffect();
+                    if (!usedEffects.has(effect) || usedEffects.size >= effects.length) {
+                        break;
+                    }
+                }
+                usedEffects.add(effect);
+                effectMap.set(idx, effect);
+            });
+
+            // 渲染结果
+            return segments.map((seg, idx) => {
                 const escaped = Utils.escapeHtml(seg);
-                const effect = effects.get(i);
-                if (effect) return `<span class="xhs-${effect}">${escaped}</span>`;
+                const effect = effectMap.get(idx);
+                if (effect) {
+                    return `<span class="${effect}">${escaped}</span>`;
+                }
                 return escaped;
             }).join('');
         },
@@ -1600,20 +1672,32 @@
             const rand = Utils.seededRandom(seed + '_deco');
             let html = '';
 
-            const corners = ['tl', 'tr', 'bl', 'br'];
-            const cornerCount = 1 + Math.floor(rand() * 2);
-            const selectedCorners = [...corners].sort(() => rand() - 0.5).slice(0, cornerCount);
+            // 角落装饰 - 提高概率到 85%
+            if (rand() < 0.85) {
+                const corners = ['tl', 'tr', 'bl', 'br'];
+                // 2-4 个角落装饰
+                const cornerCount = 2 + Math.floor(rand() * 3);
+                const selectedCorners = [...corners].sort(() => rand() - 0.5).slice(0, cornerCount);
 
-            selectedCorners.forEach(pos => {
-                const deco = this.cornerDecos[Math.floor(rand() * this.cornerDecos.length)];
-                html += `<span class="xhs-deco corner ${pos}">${deco}</span>`;
-            });
+                selectedCorners.forEach(pos => {
+                    const deco = this.cornerDecos[Math.floor(rand() * this.cornerDecos.length)];
+                    html += `<span class="xhs-deco corner ${pos}">${deco}</span>`;
+                });
+            }
 
-            if (rand() < 0.3) {
+            // 线条装饰 - 提高概率到 55%
+            if (rand() < 0.55) {
                 const lineChar = this.lineChars[Math.floor(rand() * this.lineChars.length)];
-                const count = 5 + Math.floor(rand() * 4);
+                const count = 4 + Math.floor(rand() * 5);
                 const pos = rand() > 0.5 ? 'line-t' : 'line-b';
                 html += `<span class="xhs-deco line ${pos}">${lineChar.repeat(count)}</span>`;
+            }
+
+            // 边框图案装饰 - 20% 概率
+            if (rand() < 0.20 && html.indexOf('line') === -1) {
+                const pattern = this.borderPatterns[Math.floor(rand() * this.borderPatterns.length)];
+                const pos = rand() > 0.5 ? 'line-t' : 'line-b';
+                html += `<span class="xhs-deco line ${pos}">${pattern}</span>`;
             }
 
             return html;
@@ -1679,47 +1763,107 @@
         },
 
         async _loadImage(card, tid) {
+            // 检查卡片是否仍在 DOM 中（防止已删除的卡片继续请求）
+            if (!card.isConnected) return;
+
             let data = this.cache.get(tid);
 
             if (!data) {
                 try {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 5000);
+                    const timeoutId = setTimeout(() => controller.abort(), 8000); // 超时增加到8秒
 
                     const res = await fetch(`/t/topic/${tid}.json`, {
                         signal: controller.signal,
-                        headers: { 'Accept': 'application/json' },
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        credentials: 'same-origin', // 确保携带 cookie
                         priority: 'low'
                     });
 
                     clearTimeout(timeoutId);
-                    if (!res.ok) return;
+
+                    // 处理各种 HTTP 状态
+                    if (!res.ok) {
+                        if (res.status === 404) {
+                            // 帖子不存在，缓存空数据避免重复请求
+                            this.cache.set(tid, { images: [], likes: 0, liked: false, notFound: true });
+                        } else if (res.status === 429) {
+                            // 请求过快，稍后重试
+                            await new Promise(r => setTimeout(r, 2000));
+                        }
+                        return;
+                    }
 
                     const json = await res.json();
 
+                    // 验证返回数据结构
+                    if (!json || typeof json !== 'object') {
+                        console.warn('[XHS] Invalid JSON response for topic', tid);
+                        return;
+                    }
+
                     data = {
                         images: [],
-                        likes: json.like_count || 0,
-                        liked: json.current_user_liked || false
+                        likes: parseInt(json.like_count) || 0,
+                        liked: Boolean(json.current_user_liked)
                     };
 
-                    const html = json.post_stream?.posts?.[0]?.cooked || '';
-                    const imgRegex = /<img[^>]+src="([^"]+)"[^>]*>/gi;
-                    let match;
+                    // 从 post_stream 提取图片
+                    const posts = json.post_stream?.posts;
+                    const firstPost = Array.isArray(posts) && posts.length > 0 ? posts[0] : null;
+                    const html = firstPost?.cooked || '';
 
-                    while ((match = imgRegex.exec(html)) !== null) {
-                        const src = match[1];
-                        if (!/emoji|avatar|letter_avatar|user_avatar|favicon/i.test(src)) {
-                            data.images.push(src.startsWith('/') ? location.origin + src : src);
+                    if (html) {
+                        // 改进的图片提取正则，支持更多格式
+                        const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+                        let match;
+                        const seenUrls = new Set(); // 去重
+
+                        while ((match = imgRegex.exec(html)) !== null) {
+                            let src = match[1];
+
+                            // 跳过表情、头像等系统图片
+                            if (/emoji|avatar|letter_avatar|user_avatar|favicon|badge|logo/i.test(src)) {
+                                continue;
+                            }
+
+                            // 规范化 URL
+                            if (src.startsWith('//')) {
+                                src = location.protocol + src;
+                            } else if (src.startsWith('/')) {
+                                src = location.origin + src;
+                            }
+
+                            // 去重
+                            if (seenUrls.has(src)) continue;
+                            seenUrls.add(src);
+
+                            // 尝试获取优化后的图片 URL（较小尺寸）
+                            const optimizedSrc = src.replace(/\/original\//, '/optimized/');
+
+                            data.images.push(optimizedSrc !== src ? optimizedSrc : src);
                             if (data.images.length >= 6) break;
                         }
                     }
 
                     this.cache.set(tid, data);
-                } catch {
+                } catch (err) {
+                    // 仅在非预期错误时记录
+                    if (err.name !== 'AbortError') {
+                        console.warn('[XHS] Failed to load topic data:', tid, err.message);
+                    }
                     return;
                 }
             }
+
+            // 检查帖子是否已被删除
+            if (data.notFound) return;
+
+            // 再次检查卡片是否仍在 DOM 中
+            if (!card.isConnected) return;
 
             if (data.images.length) {
                 const bgEl = card.querySelector('.xhs-card-bg');
@@ -1729,26 +1873,49 @@
                 if (bgEl && imgBox && img) {
                     // 预加载图片
                     const tempImg = new Image();
+
+                    // 设置加载超时
+                    const imgTimeout = setTimeout(() => {
+                        tempImg.src = ''; // 取消加载
+                    }, 10000);
+
                     tempImg.onload = () => {
+                        clearTimeout(imgTimeout);
+                        // 检查卡片是否仍在
+                        if (!card.isConnected) return;
+
                         // 使用 RAF 确保平滑过渡
                         requestAnimationFrame(() => {
                             img.src = data.images[0];
-                            // 等待图片实际渲染后再切换
                             img.onload = () => {
+                                if (!card.isConnected) return;
                                 bgEl.style.cssText = 'display:none!important';
                                 imgBox.style.cssText = 'display:block';
-                                // 双重 RAF 确保渲染完成
                                 requestAnimationFrame(() => {
                                     requestAnimationFrame(() => {
                                         img.classList.add('show');
                                     });
                                 });
                             };
+                            img.onerror = () => {
+                                // 图片加载失败时尝试原始 URL
+                                if (data.images[0].includes('/optimized/')) {
+                                    img.src = data.images[0].replace('/optimized/', '/original/');
+                                }
+                            };
                         });
                     };
+
                     tempImg.onerror = () => {
-                        // 图片加载失败，保持文字封面
+                        clearTimeout(imgTimeout);
+                        // 尝试原始 URL
+                        if (data.images[0].includes('/optimized/')) {
+                            const originalUrl = data.images[0].replace('/optimized/', '/original/');
+                            data.images[0] = originalUrl;
+                            tempImg.src = originalUrl;
+                        }
                     };
+
                     tempImg.src = data.images[0];
                 }
 
@@ -1762,7 +1929,7 @@
             }
 
             // 更新点赞数和状态
-            if (data.likes) {
+            if (data.likes > 0) {
                 const likeEl = card.querySelector('.xhs-card-like span:last-child');
                 if (likeEl) likeEl.textContent = Utils.formatNumber(data.likes);
             }
