@@ -1590,8 +1590,8 @@
         _processText(text, seed) {
             const rand = Utils.seededRandom(seed);
 
-            // 分词：中文词组 / 英文单词 / 空白 / 标点 / 单个中文字
-            const segments = text.match(/[\u4e00-\u9fa5]{2,}|[a-zA-Z][a-zA-Z0-9]*|\s+|[^\u4e00-\u9fa5a-zA-Z0-9\s]+|[\u4e00-\u9fa5]/g) || [text];
+            // 分词：中文词组 / 英文单词 / 数字 / 空白 / 标点 / 单个中文字
+            const segments = text.match(/[\u4e00-\u9fa5]{2,}|[a-zA-Z][a-zA-Z0-9]*|[0-9]+|\s+|[^\u4e00-\u9fa5a-zA-Z0-9\s]+|[\u4e00-\u9fa5]/g) || [text];
 
             // 找出可以加效果的词
             // 条件：中文2字以上，或英文3字母以上，且不是常见无意义词
