@@ -1774,12 +1774,11 @@
                     color: var(--xhs-c) !important;
                 }
 
-                /* ===== 帖子详情页分类/标签区域样式 ===== */
+                /* ===== 帖子详情页分类/标签区域样式（与标题一体，无独立卡片）===== */
                 body.xhs-on.xhs-topic .topic-category.ember-view {
-                    background: var(--xhs-card-bg) !important;
-                    border-radius: 12px !important;
-                    padding: 12px 16px !important;
-                    margin-bottom: 12px !important;
+                    background: transparent !important;
+                    padding: 0 !important;
+                    margin: 0 !important;
                 }
                 /* 深色模式分类区域文字 */
                 body.xhs-on.xhs-dark.xhs-topic .topic-category,
